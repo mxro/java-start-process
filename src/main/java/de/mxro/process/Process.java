@@ -9,6 +9,14 @@ package de.mxro.process;
 public interface Process {
 
 	/**
+	 * Call to push the specified {@link String} into the started processes
+	 * input.
+	 * 
+	 * @param line
+	 */
+	public void sendLine(String line);
+
+	/**
 	 * Try to destroy the process
 	 */
 	public void destory();

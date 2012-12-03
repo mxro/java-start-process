@@ -6,7 +6,7 @@ package de.mxro.process;
  * @author <a href="http://www.mxro.de/">Max Rohde</a>
  * 
  */
-public interface Process {
+public interface XProcess {
 
 	/**
 	 * Call to push the specified {@link String} into the started processes

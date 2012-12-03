@@ -27,4 +27,11 @@ public interface ProcessListener {
 	 */
 	public void onOutputClosed();
 
+	/**
+	 * When an unexpected error is thrown while interacting with the process.
+	 * 
+	 * @param t
+	 */
+	public void onError(Throwable t);
+
 }

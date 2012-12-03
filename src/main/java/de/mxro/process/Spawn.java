@@ -14,8 +14,8 @@ public class Spawn {
 	 * @param folder
 	 * @return
 	 */
-	public static XProcess process(final String command,
-			final ProcessListener listener, final File folder) {
+	public static XProcess startProcess(final String command,
+			final File folder, final ProcessListener listener) {
 		return Engine.startProcess(command, listener, folder);
 	}
 

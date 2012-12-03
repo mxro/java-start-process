@@ -6,7 +6,9 @@ Wrapper to make work with Runtime.getRuntime() easier and less error-prone.
 ## Usage
 
 1. Link the project as Maven dependency or as JAR to your project (or just download and copy&paste the packages).
-2. Start external process in your Java application as follows:
+2. Start external process in your Java application.
+
+For instance:
 
     final String cmd = "C:\\Windows\\System32\\NETSTAT.exe -ab";
 	final File folder = new File("C:\\Windows\\System32\\");

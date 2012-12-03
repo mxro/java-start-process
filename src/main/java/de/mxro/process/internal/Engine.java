@@ -80,6 +80,11 @@ public class Engine {
 
 			@Override
 			public void destory() {
+				try {
+					outputStream.close();
+				} catch (final IOException e) {
+					listener.onError(e);
+				}
 				process.destroy();
 			}
 		};

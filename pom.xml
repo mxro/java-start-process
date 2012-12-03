@@ -3,7 +3,7 @@
 <project>
 	<groupId>de.mxro.process</groupId>
 	<artifactId>java-start-process</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<description>Wrapper to simplify work with Runtime.exec()
 	</description>
 

@@ -10,6 +10,18 @@ public class StreamReader {
 	// private final InputStream stream;
 	// private final StreamListener listener;
 	private final Thread t;
+	private volatile boolean stop = false;
+	private volatile boolean stopped = false;
+
+	public void stop() {
+		if (stopped) {
+			return;
+		}
+		stop = true;
+		while (!stopped) {
+			Thread.yield();
+		}
+	}
 
 	public StreamReader(final InputStream stream, final StreamListener listener) {
 		super();
@@ -24,11 +36,11 @@ public class StreamReader {
 				try {
 					String read;
 
-					while ((read = reader.readLine()) != null) {
+					while ((read = reader.readLine()) != null || stop) {
 						listener.onOutputLine(read);
 					}
 					stream.close();
-
+					stopped = true;
 				} catch (final IOException e) {
 					listener.onError(e);
 				}

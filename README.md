@@ -57,6 +57,10 @@ For instance:
 
 ## Resources
 
+[When Runtime.exec() won't](http://www.javaworld.com/jw-12-2000/jw-1229-traps.html?page=4)
+
+[Five Common java.lang.Process Pitfalls](http://kylecartmell.com/?p=9)
+
 [SO: Java Process with Input/Output Stream](http://stackoverflow.com/questions/3643939/java-process-with-input-output-stream)
 
 [SO: Starting a process in Java?](http://stackoverflow.com/questions/3774432/starting-a-process-in-java)

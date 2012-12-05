@@ -27,43 +27,45 @@ public class Engine {
 		final InputStream inputStream = process.getInputStream();
 		final InputStream errorStream = process.getErrorStream();
 
-		new StreamReader(inputStream, new StreamListener() {
+		final StreamReader streamReader = new StreamReader(inputStream,
+				new StreamListener() {
 
-			@Override
-			public void onOutputLine(final String line) {
-				listener.onOutputLine(line);
-			}
+					@Override
+					public void onOutputLine(final String line) {
+						listener.onOutputLine(line);
+					}
 
-			@Override
-			public void onError(final Throwable t) {
-				listener.onError(new Exception(
-						"Error while reading standard output", t));
-			}
+					@Override
+					public void onError(final Throwable t) {
+						listener.onError(new Exception(
+								"Error while reading standard output", t));
+					}
 
-			@Override
-			public void onClosed() {
-				listener.onOutputClosed();
-			}
-		});
+					@Override
+					public void onClosed() {
+						listener.onOutputClosed();
+					}
+				});
 
-		new StreamReader(errorStream, new StreamListener() {
+		final StreamReader errorStreamReader = new StreamReader(errorStream,
+				new StreamListener() {
 
-			@Override
-			public void onOutputLine(final String line) {
-				listener.onErrorLine(line);
-			}
+					@Override
+					public void onOutputLine(final String line) {
+						listener.onErrorLine(line);
+					}
 
-			@Override
-			public void onError(final Throwable t) {
-				listener.onError(new Exception(
-						"Error while reading error output", t));
-			}
+					@Override
+					public void onError(final Throwable t) {
+						listener.onError(new Exception(
+								"Error while reading error output", t));
+					}
 
-			@Override
-			public void onClosed() {
+					@Override
+					public void onClosed() {
 
-			}
-		});
+					}
+				});
 
 		return new XProcess() {
 
@@ -81,11 +83,20 @@ public class Engine {
 			@Override
 			public void destory() {
 				try {
+					streamReader.stop();
+					errorStreamReader.stop();
 					outputStream.close();
 				} catch (final IOException e) {
 					listener.onError(e);
 				}
 				process.destroy();
+				try {
+					process.waitFor();
+				} catch (final InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+				System.out.println("stopped");
+
 			}
 		};
 

@@ -111,7 +111,6 @@ public class Engine {
 				} catch (final InterruptedException e) {
 					throw new RuntimeException(e);
 				}
-				System.out.println("stopped");
 
 			}
 		};

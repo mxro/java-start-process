@@ -12,7 +12,7 @@ public class StreamReader {
 	private volatile boolean stopped = false;
 
 	public void stop() {
-		System.out.println("stop");
+
 		if (stopped) {
 			return;
 		}

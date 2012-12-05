@@ -7,6 +7,56 @@ import java.io.InputStreamReader;
 
 public class StreamReader {
 
+	private final class WorkerThread extends Thread {
+		private final StreamListener listener;
+		private final InputStream stream;
+
+		private WorkerThread(final StreamListener listener,
+				final InputStream stream) {
+			this.listener = listener;
+			this.stream = stream;
+		}
+
+		@Override
+		public void run() {
+			final BufferedReader reader = new BufferedReader(
+					new InputStreamReader(stream));
+			try {
+				String read;
+
+				while (true) {
+					while (!reader.ready()) {
+						if (stop) {
+							stopReader();
+							return;
+						}
+					}
+
+					if (stop) {
+						stopReader();
+						return;
+					}
+					System.out.println("start read");
+					read = reader.readLine();
+					System.out.println("stop read");
+					if (read != null) {
+						listener.onOutputLine(read);
+					}
+				}
+
+			} catch (final IOException e) {
+				listener.onError(e);
+			}
+
+		}
+
+		private void stopReader() throws IOException {
+			stream.close();
+			stopped = true;
+			listener.onClosed();
+		}
+	}
+
 	private final Thread t;
 	private volatile boolean stop = false;
 	private volatile boolean stopped = false;
@@ -24,39 +74,7 @@ public class StreamReader {
 
 	public StreamReader(final InputStream stream, final StreamListener listener) {
 		super();
-
-		this.t = new Thread() {
-
-			@Override
-			public void run() {
-				final BufferedReader reader = new BufferedReader(
-						new InputStreamReader(stream));
-				try {
-					String read;
-
-					while (!reader.ready()) {
-						if (stop) {
-							stream.close();
-							stopped = true;
-							listener.onClosed();
-							return;
-						}
-					}
-					while ((read = reader.readLine()) != null && !stop) {
-
-						listener.onOutputLine(read);
-					}
-
-					stream.close();
-					stopped = true;
-					listener.onClosed();
-				} catch (final IOException e) {
-					listener.onError(e);
-				}
-
-			}
-
-		};
+		this.t = new WorkerThread(listener, stream);
 		this.t.start();
 	}
 

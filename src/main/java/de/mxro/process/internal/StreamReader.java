@@ -36,12 +36,13 @@ public class StreamReader {
 						stopReader();
 						return;
 					}
-					System.out.println("start read");
+
 					read = reader.readLine();
-					System.out.println("stop read");
+
 					if (read != null) {
 						listener.onOutputLine(read);
 					}
+					Thread.yield();
 				}
 
 			} catch (final IOException e) {

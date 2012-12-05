@@ -43,7 +43,7 @@ public class Engine {
 
 					@Override
 					public void onClosed() {
-						listener.onOutputClosed();
+
 					}
 				});
 
@@ -66,6 +66,22 @@ public class Engine {
 
 					}
 				});
+
+		new Thread() {
+
+			@Override
+			public void run() {
+				try {
+					final int returnValue = process.waitFor();
+					listener.onProcessQuit(returnValue);
+				} catch (final InterruptedException e) {
+					listener.onError(e);
+					return;
+				}
+
+			}
+
+		}.start();
 
 		return new XProcess() {
 

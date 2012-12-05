@@ -25,7 +25,7 @@ public interface ProcessListener {
 	/**
 	 * When the output stream is closed.
 	 */
-	public void onOutputClosed();
+	public void onProcessQuit(int returnValue);
 
 	/**
 	 * When an unexpected error is thrown while interacting with the process.

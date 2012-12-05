@@ -14,6 +14,7 @@ public class StreamReader {
 	private volatile boolean stopped = false;
 
 	public void stop() {
+		System.out.println("stop");
 		if (stopped) {
 			return;
 		}
@@ -35,16 +36,27 @@ public class StreamReader {
 						new InputStreamReader(stream));
 				try {
 					String read;
-
-					while ((read = reader.readLine()) != null || stop) {
+					System.out.println("start reading");
+					while (!reader.ready()) {
+						if (stop) {
+							stream.close();
+							stopped = true;
+							listener.onClosed();
+							return;
+						}
+					}
+					while ((read = reader.readLine()) != null && !stop) {
+						System.out.println("read");
 						listener.onOutputLine(read);
 					}
+					System.out.println("done");
 					stream.close();
 					stopped = true;
+					listener.onClosed();
 				} catch (final IOException e) {
 					listener.onError(e);
 				}
-				listener.onClosed();
+
 			}
 
 		};

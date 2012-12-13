@@ -19,4 +19,8 @@ public class Spawn {
 		return Engine.startProcess(command, listener, folder);
 	}
 
+	public interface Callback<Type> {
+		public void onDone(Type t);
+	}
+
 }

@@ -40,28 +40,29 @@ public class Spawn {
 				.synchronizedList(new LinkedList<String>());
 
 		latch.countDown();
-		startProcess(command, folder, new ProcessListener() {
+		final XProcess process = startProcess(command, folder,
+				new ProcessListener() {
 
-			@Override
-			public void onProcessQuit(final int returnValue) {
-				latch.countDown();
-			}
+					@Override
+					public void onProcessQuit(final int returnValue) {
+						latch.countDown();
+					}
 
-			@Override
-			public void onOutputLine(final String line) {
-				output.add(line);
-			}
+					@Override
+					public void onOutputLine(final String line) {
+						output.add(line);
+					}
 
-			@Override
-			public void onErrorLine(final String line) {
-				output.add(line);
-			}
+					@Override
+					public void onErrorLine(final String line) {
+						output.add(line);
+					}
 
-			@Override
-			public void onError(final Throwable t) {
-				exceptions.add(t);
-			}
-		});
+					@Override
+					public void onError(final Throwable t) {
+						exceptions.add(t);
+					}
+				});
 
 		try {
 			latch.await();
@@ -77,6 +78,7 @@ public class Spawn {
 		for (final String line : output) {
 			sb.append(line + "\n");
 		}
+		process.destory();
 		return sb.toString();
 	}
 

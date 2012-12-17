@@ -11,10 +11,13 @@ public class StreamReader {
 		private final StreamListener listener;
 		private final InputStream stream;
 
+		private transient int timeout;
+
 		private WorkerThread(final StreamListener listener,
 				final InputStream stream) {
 			this.listener = listener;
 			this.stream = stream;
+			this.timeout = 100;
 		}
 
 		@Override
@@ -30,6 +33,7 @@ public class StreamReader {
 							stopReader();
 							return;
 						}
+						waitForInput();
 					}
 
 					if (stop) {
@@ -42,11 +46,27 @@ public class StreamReader {
 					if (read != null) {
 						listener.onOutputLine(read);
 					}
-					Thread.yield();
+					waitForInput();
 				}
 
 			} catch (final IOException e) {
 				listener.onError(e);
+			}
+
+		}
+
+		/**
+		 * Wait longer and longer to not keep CPU busy.
+		 */
+		private final void waitForInput() {
+			try {
+				Thread.sleep(this.timeout);
+			} catch (final InterruptedException e) {
+				throw new RuntimeException();
+			}
+
+			if (this.timeout < 2000) {
+				this.timeout = this.timeout + 500;
 			}
 
 		}
@@ -58,6 +78,7 @@ public class StreamReader {
 		}
 	}
 
+	private transient int timeout;
 	private final Thread t;
 	private volatile boolean stop = false;
 	private volatile boolean stopped = false;

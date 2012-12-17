@@ -78,7 +78,6 @@ public class StreamReader {
 		}
 	}
 
-	private transient int timeout;
 	private final Thread t;
 	private volatile boolean stop = false;
 	private volatile boolean stopped = false;

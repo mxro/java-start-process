@@ -34,7 +34,9 @@ public class StreamReader {
 							return;
 						}
 						waitForInput();
+
 					}
+					this.timeout = 100;
 
 					if (stop) {
 						stopReader();

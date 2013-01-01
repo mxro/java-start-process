@@ -86,4 +86,15 @@ public class Spawn {
 		public void onDone(Type t);
 	}
 
+	/**
+	 * Runs bash scripts (*.sh) in a UNIX environment.
+	 * 
+	 * @param bashScriptFile
+	 * @return
+	 */
+	public static String runBashScript(final File bashScriptFile) {
+		return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(),
+				null);
+	}
+
 }

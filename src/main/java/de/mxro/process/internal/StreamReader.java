@@ -68,7 +68,7 @@ public class StreamReader {
 			}
 
 			if (this.timeout < 2000) {
-				this.timeout = this.timeout + 500;
+				this.timeout = this.timeout + 100;
 			}
 
 		}

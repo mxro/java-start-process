@@ -12,13 +12,14 @@ import de.mxro.process.XProcess;
 
 public class Engine {
 
-	public static XProcess startProcess(final String command,
+	public static XProcess startProcess(final String[] command,
 			final ProcessListener listener, final File folder) {
 
 		final Process process;
-		final String[] cmd = command.split(" ");
+
 		try {
-			process = Runtime.getRuntime().exec(cmd, null, folder);
+
+			process = Runtime.getRuntime().exec(command, null, folder);
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}

@@ -20,7 +20,16 @@ public class Spawn {
 	 */
 	public static XProcess startProcess(final String command,
 			final File folder, final ProcessListener listener) {
+		return startProcess(command.split(" "), folder, listener);
+	}
+
+	public static XProcess startProcess(final String[] command,
+			final File folder, final ProcessListener listener) {
 		return Engine.startProcess(command, listener, folder);
+	}
+
+	public static String runCommand(final String command, final File folder) {
+		return runCommand(command.split(" "), folder);
 	}
 
 	/**
@@ -29,7 +38,7 @@ public class Spawn {
 	 * @param command
 	 * @param folder
 	 */
-	public static String runCommand(final String command, final File folder) {
+	public static String runCommand(final String[] command, final File folder) {
 
 		final CountDownLatch latch = new CountDownLatch(2);
 
@@ -66,6 +75,7 @@ public class Spawn {
 
 		try {
 			latch.await();
+			Thread.sleep(500); // just wait for input to gobble in
 		} catch (final InterruptedException e) {
 			throw new RuntimeException(e);
 		}

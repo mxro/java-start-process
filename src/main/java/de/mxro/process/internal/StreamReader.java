@@ -17,7 +17,7 @@ public class StreamReader {
 				final InputStream stream) {
 			this.listener = listener;
 			this.stream = stream;
-			this.timeout = 100;
+			this.timeout = 10;
 		}
 
 		@Override
@@ -68,7 +68,7 @@ public class StreamReader {
 			}
 
 			if (this.timeout < 2000) {
-				this.timeout = this.timeout + 100;
+				this.timeout = this.timeout + (this.timeout);
 			}
 
 		}

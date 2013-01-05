@@ -8,7 +8,15 @@ Wrapper to make work with Runtime.getRuntime() easier and less error-prone.
 1. Link the project as Maven dependency or as JAR to your project (or just download and copy&paste the packages).
 2. Start external process in your Java application.
 
-For instance:
+
+
+### Starting a process synchronously
+
+    Spawn.runCommand(new String[] { "/bin/bash", "-c",
+                    "vmstat -s -S M | egrep -ie 'memory|swap' | grep 'free memory'" },
+                            null);
+
+### Starting a process asynchronously
 
     final String cmd = "C:\\Windows\\System32\\NETSTAT.exe -ab";
 	final File folder = new File("C:\\Windows\\System32\\");
@@ -60,6 +68,8 @@ For instance:
 [When Runtime.exec() won't](http://www.javaworld.com/jw-12-2000/jw-1229-traps.html?page=4)
 
 [Five Common java.lang.Process Pitfalls](http://kylecartmell.com/?p=9)
+
+[Apache Commons Exec](http://commons.apache.org/exec/)
 
 [SO: Java Process with Input/Output Stream](http://stackoverflow.com/questions/3643939/java-process-with-input-output-stream)
 

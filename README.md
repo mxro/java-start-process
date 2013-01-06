@@ -67,6 +67,8 @@ Wrapper to make work with Runtime.getRuntime() easier and less error-prone.
 
 [When Runtime.exec() won't](http://www.javaworld.com/jw-12-2000/jw-1229-traps.html?page=4)
 
+[Executing a Command Line Executable From Java](http://developer4life.blogspot.co.nz/2013/01/executing-command-line-executable-from.html)
+
 [Five Common java.lang.Process Pitfalls](http://kylecartmell.com/?p=9)
 
 [Apache Commons Exec](http://commons.apache.org/exec/)

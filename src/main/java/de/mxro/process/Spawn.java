@@ -106,5 +106,9 @@ public class Spawn {
 		return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(),
 				null);
 	}
+	
+	public static String runBashCommand(final String bashCommand) {
+		return runCommand(new String[] {"/bin/bash", "-c", bashCommand}, null);
+	}
 
 }

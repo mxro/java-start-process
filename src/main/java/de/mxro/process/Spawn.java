@@ -107,8 +107,12 @@ public class Spawn {
 				null);
 	}
 	
+	public static String runBashCommand(final String bashCommand, File folder) {
+		return runCommand(new String[] {"/bin/bash", "-c", bashCommand}, folder);
+	}
+	
 	public static String runBashCommand(final String bashCommand) {
-		return runCommand(new String[] {"/bin/bash", "-c", bashCommand}, null);
+		return runBashCommand(bashCommand, null);
 	}
 
 }

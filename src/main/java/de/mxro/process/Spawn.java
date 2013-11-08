@@ -1,6 +1,7 @@
 package de.mxro.process;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class Spawn {
 
 		try {
 			latch.await();
-			Thread.sleep(500); // just wait for input to gobble in
+			Thread.sleep(300); // just wait for input to gobble in
 		} catch (final InterruptedException e) {
 			throw new RuntimeException(e);
 		}
@@ -85,9 +86,10 @@ public class Spawn {
 		}
 
 		final StringBuilder sb = new StringBuilder();
-		for (final String line : output) {
+		for (final String line : new ArrayList<String>(output)) {
 			sb.append(line + "\n");
 		}
+		
 		process.destory();
 		return sb.toString();
 	}

@@ -27,31 +27,23 @@ public class StreamReader {
 			try {
 				String read;
 
-				while (true) {
-					while (!reader.ready()) {
-						if (stop) {
-							stopReader();
-							return;
-						}
-						waitForInput();
+				this.timeout = 10;
 
-					}
-					this.timeout = 10;
-
+				read = reader.readLine();
+				while (!stop && read != null && !read.trim().equals("--EOF--")) {
 					if (stop) {
 						stopReader();
 						return;
 					}
 
-					read = reader.readLine();
-
 					if (read != null) {
 						listener.onOutputLine(read);
 					}
-					waitForInput();
+					// waitForInput();
+					read = reader.readLine();
 				}
 
-			} catch (final IOException e) {
+			} catch (final Exception e) {
 				listener.onError(e);
 			}
 
@@ -74,7 +66,7 @@ public class StreamReader {
 		}
 
 		private void stopReader() throws IOException {
-			stream.close();
+			//stream.close();
 			stopped = true;
 			listener.onClosed();
 		}
@@ -84,21 +76,25 @@ public class StreamReader {
 	private volatile boolean stop = false;
 	private volatile boolean stopped = false;
 
+	public void read() {
+		t.run();
+	}
+
 	public void stop() {
 
 		if (stopped) {
 			return;
 		}
 		stop = true;
-		while (!stopped) {
-			Thread.yield();
-		}
+		//while (!stopped) {
+		//	Thread.yield();
+		//}
 	}
 
 	public StreamReader(final InputStream stream, final StreamListener listener) {
 		super();
 		this.t = new WorkerThread(listener, stream);
-		this.t.start();
+
 	}
 
 }

@@ -76,7 +76,7 @@ public class Spawn {
 
 		try {
 			latch.await();
-			Thread.sleep(300); // just wait for input to gobble in
+			//Thread.sleep(300); // just wait for input to gobble in
 		} catch (final InterruptedException e) {
 			throw new RuntimeException(e);
 		}

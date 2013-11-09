@@ -124,9 +124,9 @@ public class Engine {
 
 					final int returnValue = process.waitFor();
 					
-					while (lastOutput.get() == 0 && new Date().getTime() - startTime < 500) {
-						Thread.sleep(10);
-					}
+					//while (lastOutput.get() == 0 && new Date().getTime() - startTime < 500) {
+					//	Thread.sleep(10);
+					//}
 					
 					//while ( new Date().getTime() - lastOutput.get() < 1000) {
 					//	System.out.println("DELAY ... "+(new Date().getTime() - lastOutput.get()));

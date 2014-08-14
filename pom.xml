@@ -344,5 +344,28 @@
 			<url>http://maven.appjangle.com/appjangle/releases</url>
 		</repository>
 	</repositories>
+	
+	<developers>
+		<developer>
+			<id>mxro</id>
+			<name>Max Rohde</name>
+			<email>noemail@mxro.de</email>
+			<url>http://www.mxro.de/</url>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+10</timezone>
+			<organization>pureleap</organization>
+			<organizationUrl>http://pureleap.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:mxro/java-start-process.git</connection>
+		<url>https://github.com/mxro/java-start-process</url>
+		<developerConnection>scm:git:git@github.com:mxro/java-start-process.git
+		</developerConnection>
+	</scm>
 
 </project>

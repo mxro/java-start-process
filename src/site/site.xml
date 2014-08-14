@@ -23,14 +23,11 @@
 		</fluidoSkin>
 	</custom>
 
-
 	<body>
 		<links>
 			<item name="Max Rohde" href="http://www.mxro.de" />
 			<item name="Appjangle" href="http://appjangle.com" />
 		</links>
-
-
 
 		<menu ref="reports" />
 	</body>

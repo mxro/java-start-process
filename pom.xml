@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Template: Source + GWT + in workspace dependencies 27.11.2010 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<groupId>de.mxro.process</groupId>
 	<artifactId>java-start-process</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
@@ -9,7 +9,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 	</description>
 
 	<properties>
-		
+
 
 		<module.gwtVersion>2.2.0</module.gwtVersion>
 		<module.draftCompile>true</module.draftCompile>
@@ -106,7 +106,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			</plugin>
 
 
-			
+
 
 			<!-- FOR MAVEN ECLIPSE PLUGIN -->
 			<!-- Dependency Plugin used to copy the dependency JARs into the root 
@@ -115,7 +115,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
-					
+
 				</executions>
 			</plugin>
 
@@ -160,7 +160,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
 		<!-- RESOURCES -->
 		<resources>
-			
+
 
 			<!-- This entry makes sure that resources, which lie in the same package 
 				as Java classes, are copied into the target. Often external libraries require 
@@ -198,8 +198,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			</resource>
 
 		</resources>
-		
-		<extensions><extension><groupId>org.apache.maven.wagon</groupId><artifactId>wagon-ssh-external</artifactId><version>2.5</version></extension><extension><groupId>org.apache.maven.wagon</groupId><artifactId>wagon-ssh</artifactId><version>2.5</version></extension></extensions>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.5</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>2.5</version>
+			</extension>
+		</extensions>
 	</build>
 
 	<distributionManagement>

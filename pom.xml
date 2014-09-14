@@ -83,16 +83,6 @@
 			
 
 
-			<!-- FOR MAVEN ECLIPSE PLUGIN -->
-			<!-- Dependency Plugin used to copy the dependency JARs into the root 
-				project folder. There the Maven eclipse plugin will add them to the classpath 
-				of PDE projects. -->
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-
-				</executions>
-			</plugin>
 
 			<!-- Cleanup necessary because of PDE tweaks, clear the project directory -->
 			<plugin>

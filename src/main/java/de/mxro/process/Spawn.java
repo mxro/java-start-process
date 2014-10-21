@@ -11,110 +11,110 @@ import de.mxro.process.internal.Engine;
 
 public class Spawn {
 
-	/**
-	 * Start a new process.
-	 * 
-	 * @param command
-	 * @param listener
-	 * @param folder
-	 * @return
-	 */
-	public static XProcess startProcess(final String command,
-			final File folder, final ProcessListener listener) {
-		return startProcess(command.split(" "), folder, listener);
-	}
+    /**
+     * Start a new process.
+     * 
+     * @param command
+     * @param listener
+     * @param folder
+     * @return
+     */
+    public static XProcess startProcess(final String command, final File folder, final ProcessListener listener) {
+        return startProcess(command.split(" "), folder, listener);
+    }
 
-	public static XProcess startProcess(final String[] command,
-			final File folder, final ProcessListener listener) {
-		return Engine.startProcess(command, listener, folder);
-	}
+    public static XProcess startProcess(final String[] command, final File folder, final ProcessListener listener) {
+        return Engine.startProcess(command, listener, folder);
+    }
 
-	public static String runCommand(final String command, final File folder) {
-		return runCommand(command.split(" "), folder);
-	}
+    public static String runCommand(final String command, final File folder) {
+        return runCommand(command.split(" "), folder);
+    }
 
-	/**
-	 * Runs a command in a new process and stops the process thereafter.
-	 * 
-	 * @param command
-	 * @param folder
-	 */
-	public static String runCommand(final String[] command, final File folder) {
+    /**
+     * Runs a command in a new process and stops the process thereafter.
+     * 
+     * @param command
+     * @param folder
+     */
+    public static String runCommand(final String[] command, final File folder) {
 
-		final CountDownLatch latch = new CountDownLatch(2);
+        final CountDownLatch latch = new CountDownLatch(2);
 
-		final List<Throwable> exceptions = Collections
-				.synchronizedList(new LinkedList<Throwable>());
+        final List<Throwable> exceptions = Collections.synchronizedList(new LinkedList<Throwable>());
 
-		final List<String> output = Collections
-				.synchronizedList(new LinkedList<String>());
+        final List<String> output = Collections.synchronizedList(new LinkedList<String>());
 
-		latch.countDown();
-		final XProcess process = startProcess(command, folder,
-				new ProcessListener() {
+        latch.countDown();
+        final XProcess process = startProcess(command, folder, new ProcessListener() {
 
-					@Override
-					public void onProcessQuit(final int returnValue) {
-						latch.countDown();
-					}
+            @Override
+            public void onProcessQuit(final int returnValue) {
+                latch.countDown();
+            }
 
-					@Override
-					public void onOutputLine(final String line) {
-						output.add(line);
-					}
+            @Override
+            public void onOutputLine(final String line) {
+                output.add(line);
+            }
 
-					@Override
-					public void onErrorLine(final String line) {
-						output.add(line);
-					}
+            @Override
+            public void onErrorLine(final String line) {
+                output.add(line);
+            }
 
-					@Override
-					public void onError(final Throwable t) {
-						exceptions.add(t);
-					}
-				});
+            @Override
+            public void onError(final Throwable t) {
+                exceptions.add(t);
+            }
+        });
 
-		try {
-			latch.await();
-			//Thread.sleep(300); // just wait for input to gobble in
-		} catch (final InterruptedException e) {
-			throw new RuntimeException(e);
-		}
+        try {
+            latch.await();
+            // Thread.sleep(300); // just wait for input to gobble in
+        } catch (final InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
-		if (exceptions.size() > 0) {
-			throw new RuntimeException(exceptions.get(0));
-		}
+        if (exceptions.size() > 0) {
+            throw new RuntimeException(exceptions.get(0));
+        }
 
-		final StringBuilder sb = new StringBuilder();
-		for (final String line : new ArrayList<String>(output)) {
-			sb.append(line + "\n");
-		}
-		
-		process.destory();
-		return sb.toString();
-	}
+        final StringBuilder sb = new StringBuilder();
+        for (final String line : new ArrayList<String>(output)) {
+            sb.append(line + "\n");
+        }
 
-	public interface Callback<Type> {
-		public void onDone(Type t);
-	}
+        process.destory();
+        return sb.toString();
+    }
 
-	/**
-	 * Runs bash scripts (*.sh) in a UNIX environment.
-	 * 
-	 * @param bashScriptFile
-	 * @return
-	 */
-	public static String runBashScript(final File bashScriptFile) {
-		return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(),
-				null);
-	}
-	
-	public static String runBashCommand(final String bashCommand, File folder) {
-		return runCommand(new String[] {"/bin/bash", "-c", bashCommand}, folder);
-	}
-	
-	public static String runBashCommand(final String bashCommand) {
-		return runBashCommand(bashCommand, null);
-	}
+    public interface Callback<Type> {
+        public void onDone(Type t);
+    }
+
+    /**
+     * Runs bash scripts (*.sh) in a UNIX environment.
+     * 
+     * @param bashScriptFile
+     * @return
+     */
+    public static String runBashScript(final File bashScriptFile) {
+        return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(), null);
+    }
+
+    public static String runBashCommand(final String bashCommand, final File folder) {
+        return runCommand(new String[] { "/bin/bash", "-c", bashCommand }, folder);
+    }
+
+    /**
+     * Executes a bash command.
+     * 
+     * @param bashCommand
+     * @return
+     */
+    public static String sh(final String bashCommand) {
+        return runBashCommand(bashCommand, null);
+    }
 
 }

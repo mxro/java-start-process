@@ -104,7 +104,12 @@ public class Spawn {
     }
 
     public static String runBashCommand(final String bashCommand, final File folder) {
-        return runCommand(new String[] { "/bin/bash", "-c", bashCommand }, folder);
+
+        if (!System.getProperty("os.name").startsWith("Windows")) {
+            return runCommand(new String[] { "/bin/bash", "-c", bashCommand }, folder);
+        } else {
+            return runCommand(new String[] { "cmd.exe", "/C", bashCommand }, folder);
+        }
     }
 
     /**

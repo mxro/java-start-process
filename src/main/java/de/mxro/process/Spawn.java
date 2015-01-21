@@ -100,7 +100,7 @@ public class Spawn {
      * @return
      */
     public static String runBashScript(final File bashScriptFile) {
-        return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(), null);
+        return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(), bashScriptFile.getParentFile());
     }
 
     public static String runBashCommand(final String bashCommand, final File folder) {

@@ -3,11 +3,19 @@ java-start-process
 
 Wrapper to make work with Runtime.getRuntime() easier and less error-prone.
 
+## Why
+
+Starting another program from within a Java application is easy to do. Just provide the path to the application to the method Runtime.exec() 
+and the JVM will launch the specified application. However, as with so many supposedly simple tasks in software development, 
+the devil lies in the detail. It is all too easy to introduce bugs around a call to Runtime.exec(), especially when one wants 
+to pass parameters or read the output of the launched application.
+
+This library is designed to make the task of starting applications from Java programs easier.
+
 ## Usage
 
 1. Link the project as Maven dependency or as JAR to your project (or just download and copy&paste the packages).
 2. Start external process in your Java application.
-
 
 
 ### Starting a process synchronously

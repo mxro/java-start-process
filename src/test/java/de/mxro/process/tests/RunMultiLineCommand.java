@@ -1,5 +1,6 @@
 package de.mxro.process.tests;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.mxro.process.Spawn;
@@ -13,7 +14,9 @@ public class RunMultiLineCommand {
             return;
         }
 
-        System.out.println(Spawn.sh("echo '123'\n echo '456'"));
+        final String res = Spawn.sh("echo '123'\n echo '456'");
+        Assert.assertTrue(res.contains("123"));
+        Assert.assertTrue(res.contains("456"));
 
     }
 

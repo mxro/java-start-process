@@ -12,6 +12,9 @@ public class RunMultiLineCommand {
             System.out.println("Test cannot run on Windows.");
             return;
         }
+
+        System.out.println(Spawn.sh("echo '123'\n echo '456'"));
+
     }
 
 }

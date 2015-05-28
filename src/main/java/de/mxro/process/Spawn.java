@@ -103,9 +103,13 @@ public class Spawn {
         return runCommand("/bin/bash -c " + bashScriptFile.getAbsolutePath(), bashScriptFile.getParentFile());
     }
 
+    public static boolean isWindows() {
+        return System.getProperty("os.name").startsWith("Windows");
+    }
+
     public static String runBashCommand(final String bashCommand, final File folder) {
 
-        if (!System.getProperty("os.name").startsWith("Windows")) {
+        if (!isWindows()) {
             return runCommand(new String[] { "/bin/bash", "-c", bashCommand }, folder);
         } else {
             return runCommand(new String[] { "cmd.exe", "/C", bashCommand }, folder);

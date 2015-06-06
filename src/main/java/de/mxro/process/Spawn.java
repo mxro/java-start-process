@@ -107,7 +107,7 @@ public class Spawn {
         return System.getProperty("os.name").startsWith("Windows");
     }
 
-    public static String runBashCommand(final String bashCommand, final File folder) {
+    public static String sh(final File folder, final String bashCommand) {
 
         if (!isWindows()) {
             return runCommand(new String[] { "/bin/bash", "-c", bashCommand }, folder);
@@ -123,7 +123,7 @@ public class Spawn {
      * @return
      */
     public static String sh(final String bashCommand) {
-        return runBashCommand(bashCommand, null);
+        return sh(null, bashCommand);
     }
 
 }

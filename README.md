@@ -1,6 +1,8 @@
 java-start-process
 ==================
 
+**Important** This project has moved to [javadelight/delight-java-start-process](https://github.com/javadelight/delight-java-start-process) **Important**
+
 Wrapper to make work with Runtime.getRuntime() easier and less error-prone.
 
 ## Why
